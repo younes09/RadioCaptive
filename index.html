@@ -1,421 +1,300 @@
 <!DOCTYPE html>
-<html class="dark" lang="fr">
 
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>Radio Algérienne - Wi-Fi Captive Portal</title>
-
-  <!-- Tailwind & Fonts -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&display=swap" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="assets/logo.png">
-
-  <script id="tailwind-config">
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#2bee6c",
-            "background-light": "#f8fafc",
-            "background-dark": "#09120b",
-            "charcoal": "#111827",
-          },
-          fontFamily: {
-            "display": ["Public Sans", "sans-serif"]
-          },
-          borderRadius: {
-            "DEFAULT": "0.5rem",
-            "lg": "0.75rem",
-            "xl": "1rem",
-            "2xl": "1.5rem",
-            "full": "9999px"
-          },
-        },
-      },
-    }
-  </script>
-
-  <style>
-    body {
-      font-family: 'Public Sans', sans-serif;
-      letter-spacing: -0.01em;
-    }
-
-    .glass-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(43, 238, 108, 0.15);
-      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    }
-
-    .heading-premium {
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-
-    .btn-glow {
-      box-shadow: 0 0 20px rgba(43, 238, 108, 0.3);
-      background: linear-gradient(135deg, #2bee6c 0%, #16a34a 100%);
-    }
-  </style>
-</head>
-
-<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
-
-  <!-- Top Navigation Bar -->
-  <header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-dark/60 backdrop-blur-xl px-4 lg:px-40 py-5">
-    <div class="flex items-center justify-between max-w-[1200px] mx-auto">
-      <div class="flex items-center gap-3">
-        <div class="size-8 text-primary">
-          <img alt="Radio Algérienne Logo" class="h-full w-auto object-contain" src="assets/logo.png" />
-        </div>
-        <h1 class="text-lg font-black tracking-tight uppercase hidden sm:block heading-premium">
-          Radio Algérienne
-        </h1>
-      </div>
-
-      <div class="flex items-center gap-6">
-        <nav class="hidden md:flex items-center gap-4 text-sm font-medium">
-          <a class="hover:text-primary transition-colors" href="#">Français</a>
-          <span class="text-primary/30">|</span>
-          <a class="hover:text-primary transition-colors" dir="rtl" href="#">العربية</a>
-        </nav>
-        <div class="flex gap-2">
-          <div class="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary">
-            <span class="material-symbols-outlined text-sm">wifi</span>
-            Free Wi-Fi
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main class="flex-1 max-w-[1200px] mx-auto w-full px-4 py-16 space-y-24">
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden rounded-3xl bg-charcoal dark:bg-black/40 p-12 lg:p-24 text-center border border-primary/20 shadow-2xl shadow-primary/5">
-      <div class="absolute inset-0 opacity-30 pointer-events-none" style="background-image: radial-gradient(circle at 50% 50%, #2bee6c 0%, transparent 70%);"></div>
-      <div class="absolute -top-24 -left-24 size-64 bg-primary/10 rounded-full blur-3xl"></div>
-      <div class="absolute -bottom-24 -right-24 size-64 bg-primary/10 rounded-full blur-3xl"></div>
-
-      <div class="relative z-10 max-w-2xl mx-auto space-y-8">
-        <div class="inline-flex items-center justify-center p-5 rounded-full bg-primary/10 border border-primary/20 mb-4 animate-bounce">
-          <span class="material-symbols-outlined text-5xl text-primary">sensors</span>
-        </div>
-        <div class="space-y-4">
-          <h2 class="text-4xl lg:text-6xl font-black text-white leading-tight heading-premium tracking-tighter">
-            Radio Algérienne
-          </h2>
-          <h3 class="text-2xl lg:text-3xl font-medium text-primary/90" dir="rtl">
-            الإذاعة الجزائرية
-          </h3>
-        </div>
-        <p class="text-slate-400 text-lg max-w-md mx-auto leading-relaxed">
-          Connectez-vous au Wi-Fi gratuit et vivez l'information et la culture en direct.
-        </p>
-        <div class="pt-6">
-          <button class="btn-glow text-background-dark font-black py-5 px-14 rounded-2xl transition-all transform hover:scale-105 active:scale-95 flex items-center gap-4 mx-auto text-lg">
-            <span>Se Connecter / تسجيل الدخول</span>
-            <span class="material-symbols-outlined">wifi_tethering</span>
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <!-- Live Section -->
-    <section class="space-y-6">
-      <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold flex items-center gap-2 heading-premium">
-          <span class="material-symbols-outlined text-red-500 animate-pulse">radio</span>
-          Radios en Direct / الإذاعات المباشرة
-        </h2>
-      </div>
-      <div id="stations-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <!-- Radio stations will be injected here by JS -->
-      </div>
-    </section>
-
-    <!-- News Snippets -->
-    <section class="space-y-6">
-      <h2 class="text-2xl font-bold flex items-center gap-2 heading-premium">
-        <span class="material-symbols-outlined text-primary">newspaper</span>
-        Actualités / الأخبار
-      </h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <!-- News Item 1 -->
-        <article class="group cursor-pointer">
-          <div class="rounded-lg overflow-hidden mb-4 aspect-[4/3]">
-            <div class="w-full h-full bg-cover bg-center transition-transform group-hover:scale-110 duration-500" data-alt="Digital technology background with glow" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcjyzZgHx1YKw9iGwozQICXaaHK3QAY7C8b-ClN4cJhGe8QpygBl1CvhFLEMfa2VVGolfKloWwRSBHn0EaAGPlhB1ByaVIPkqi-P1To61IuuwDTf1TcXp957TCgM4WM3A18gQ3ZLa-ir9-bVPKavxCImMlFdS3jBrv7Lr-1UMLTgQ3usxuKwYEsXzucPnX3i6I8yBgcV0zhtDQHXZuezL7gdyV_FIeGcAclnYOrtRkOswgO5p4EIXBP5e9XpX0PvwzYq3ljXAElU0Z');"></div>
-          </div>
-          <h3 class="font-bold group-hover:text-primary transition-colors leading-snug tracking-tight">
-            Développement des infrastructures numériques en Algérie : Nouveaux jalons posés.
-          </h3>
-          <p class="text-xs text-slate-500 mt-2 font-medium" dir="rtl">تطوير البنية التحتية الرقمية في الجزائر: معالم جديدة تم وضعها.</p>
-        </article>
-
-        <!-- News Item 2 -->
-        <article class="group cursor-pointer">
-          <div class="rounded-lg overflow-hidden mb-4 aspect-[4/3]">
-            <div class="w-full h-full bg-cover bg-center transition-transform group-hover:scale-110 duration-500" data-alt="Young people discussing at a conference" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDOwh6qt4AnpO8xKvREMlh-59hQxZAULRgfmzGw5-FnGzR_nKXGW3HRycLL8Vl4xPYeYXfMdno4-JJrCQYYDVvdrihvNpSvuGNnnCZrYKrTd5l4NyRCJOXnT53dKmMqMLhnP0qbpSa_ZV-Jk1vDhs0wBqmQldsFXSX9M8OoR-L9mCzwhJkTO4XDkZmDdwZgf6Sp99BxQSInEDhDpB-veX9gOGwQ3F-dtFMM9SKvy5LJ4pzAcMh5_dm80uYoxAtK-fatg8TsTtAdZwl1');"></div>
-          </div>
-          <h3 class="font-bold group-hover:text-primary transition-colors leading-snug tracking-tight">
-            Lancement de la 12ème édition du Festival Culturel National.
-          </h3>
-          <p class="text-xs text-slate-500 mt-2 font-medium" dir="rtl">انطلاق الطبعة الثانية عشرة للمهرجان الثقافي الوطني.</p>
-        </article>
-
-        <!-- News Item 3 -->
-        <article class="group cursor-pointer">
-          <div class="rounded-lg overflow-hidden mb-4 aspect-[4/3]">
-            <div class="w-full h-full bg-cover bg-center transition-transform group-hover:scale-110 duration-500" data-alt="Soccer player in action on field" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD8A769DbMkuPibPyySI3_B5gB1sDKoGLs_kcVx_3zuBrzGzYPKr8pbwdrDjnIAuSD7POyXKQ-5yklO9CAcKS5Nh14CBdYmDndTuapIHlGH9piUhwbWjSIu9Ii-kZvH18lEpOdAbDKxosJI1uf8azEpciLx3YEhOo567UT2l9a5heYae6WAV3lGPx7-Wm6mnSI53iuUFZw8-jlfv1opzgxtBQQh_CKupq1RN8tIcFTZbZrqB0L7jgClYuUnKzLBT2ZclfAVkNlprfJ3');"></div>
-          </div>
-          <h3 class="font-bold group-hover:text-primary transition-colors leading-snug tracking-tight">
-            Équipe Nationale : Préparatifs intensifs pour les prochaines qualifications.
-          </h3>
-          <p class="text-xs text-slate-500 mt-2 font-medium" dir="rtl">المنتخب الوطني: تحضيرات مكثفة للتصفيات القادمة.</p>
-        </article>
-      </div>
-    </section>
-  </main>
-
-  <!-- Footer -->
-  <footer class="mt-auto border-t border-primary/10 bg-background-dark py-20 px-4">
-    <div class="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
-      <div class="space-y-4">
-        <div class="flex items-center justify-center md:justify-start gap-2">
-          <div class="size-6 text-primary">
-            <img alt="Radio Algérienne Logo" class="h-full w-auto object-contain" src="assets/logo.png" />
-          </div>
-          <span class="font-bold uppercase tracking-tight">Radio Algérienne</span>
-        </div>
-        <p class="text-sm text-slate-500 max-w-xs mx-auto md:mx-0">
-          L'Etablissement Public de Radiodiffusion Sonore. Au service de l'information et de la culture.
-        </p>
-      </div>
-
-      <div class="space-y-4">
-        <h4 class="font-bold text-sm uppercase tracking-widest text-primary heading-premium">Suivez-nous</h4>
-        <div class="flex justify-center md:justify-start gap-6">
-          <a class="text-slate-400 hover:text-primary transition-colors" href="#">
-            <svg class="size-6" fill="currentColor" viewbox="0 0 24 24">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
-            </svg>
-          </a>
-          <a class="text-slate-400 hover:text-primary transition-colors" href="#">
-            <svg class="size-6" fill="currentColor" viewbox="0 0 24 24">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
-            </svg>
-          </a>
-          <a class="text-slate-400 hover:text-primary transition-colors" href="#">
-            <svg class="size-6" fill="currentColor" viewbox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.312 2.687.072 7.053.014 8.333 0 8.741 0 12s.014 3.667.072 4.947c.2 4.358 2.583 6.77 6.941 6.97.128.058.128.058 1.28.058 3.259 0 3.667-.014 4.947-.072 4.358-.2 6.77-2.583 6.97-6.941.058-1.28.072-1.687.072-4.947s-.014-3.667-.072-4.947c-.2-4.358-2.582-6.77-6.941-6.97C15.667.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path>
-            </svg>
-          </a>
-        </div>
-      </div>
-
-      <div class="space-y-4">
-        <h4 class="font-bold text-sm uppercase tracking-widest text-primary heading-premium">Légal</h4>
-        <div class="flex flex-col gap-2 text-sm text-slate-500">
-          <a class="hover:text-primary transition-colors" href="#">Conditions d'utilisation</a>
-          <a class="hover:text-primary transition-colors" href="#">Politique de confidentialité</a>
-          <p class="pt-2">© 2024 Radio Algérienne.</p>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Persistent Player Bar -->
-  <div id="player-bar" class="fixed bottom-0 left-0 right-0 z-[60] p-4 transform translate-y-full transition-transform duration-500 ease-in-out">
-    <div class="max-w-[800px] mx-auto glass-card rounded-2xl p-4 flex items-center justify-between gap-6 border-primary/30 shadow-2xl bg-background-dark/90 text-white">
-      <div class="flex items-center gap-4 min-w-0">
-        <div id="bar-icon-container" class="size-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary flex-shrink-0 animate-pulse">
-          <span id="bar-icon" class="material-symbols-outlined text-2xl">radio</span>
-        </div>
-        <div class="min-w-0">
-          <h4 id="bar-station-name" class="font-bold truncate text-lg">En attente...</h4>
-          <p class="text-xs text-primary/70 uppercase tracking-widest font-bold">En Direct</p>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-3">
-        <button onclick="toggleGlobalPlay()" class="size-14 rounded-full bg-primary text-background-dark flex items-center justify-center hover:scale-110 active:scale-90 transition-all shadow-lg shadow-primary/20">
-          <span id="bar-play-icon" class="material-symbols-outlined text-3xl">pause</span>
-        </button>
-        <div class="hidden sm:block h-8 w-px bg-white/10 mx-2"></div>
-        <button onclick="stopRadio()" class="p-2 text-white/40 hover:text-red-500 transition-colors">
-          <span class="material-symbols-outlined">close</span>
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <audio id="radio-player" preload="none"></audio>
-
-  <script>
-    const stations = [{
-        id: 'chaine1',
-        name: 'Chaîne 1',
-        nameAr: 'القناة الأولى',
-        url: 'https://radiochaine1.ice.infomaniak.ch/chaine1.mp3',
-        icon: 'radio_button_checked'
-      },
-      {
-        id: 'chaine2',
-        name: 'Chaîne 2',
-        nameAr: 'القناة الثانية',
-        url: 'https://radiochaine1.ice.infomaniak.ch/chaine2.mp3',
-        icon: 'settings_input_antenna'
-      },
-      {
-        id: 'chaine3',
-        name: 'Chaîne 3',
-        nameAr: 'القناة الثالثة',
-        url: 'https://radiochaine1.ice.infomaniak.ch/chaine3.mp3',
-        icon: 'mic'
-      },
-      {
-        id: 'internationale',
-        name: 'Internationale',
-        nameAr: 'الإذاعة الدولية',
-        url: 'https://radiointernationale.ice.infomaniak.ch/internationale.mp3',
-        icon: 'public'
-      },
-      {
-        id: 'zamen',
-        name: 'Zamen',
-        nameAr: 'إذاعة زمان',
-        url: 'https://radiozamen.ice.infomaniak.ch/zamen.mp3',
-        icon: 'history'
-      },
-      {
-        id: 'jeunesse',
-        name: 'Jeunesse',
-        nameAr: 'جيل أف أم',
-        url: 'https://radiojeunesse.ice.infomaniak.ch/jeunesse.mp3',
-        icon: 'flash_on'
-      },
-      {
-        id: 'culture',
-        name: 'Culture',
-        nameAr: 'الثقافية',
-        url: 'https://radioculture.ice.infomaniak.ch/culture.mp3',
-        icon: 'menu_book'
-      },
-      {
-        id: 'coran',
-        name: 'Coran',
-        nameAr: 'إذاعة القرآن',
-        url: 'https://radiocoran.ice.infomaniak.ch/coran.mp3',
-        icon: 'auto_stories'
-      }
-    ];
-
-    const grid = document.getElementById('stations-grid');
-    const radioPlayer = document.getElementById('radio-player');
-    const playerBar = document.getElementById('player-bar');
-    const barStationName = document.getElementById('bar-station-name');
-    const barIcon = document.getElementById('bar-icon');
-    const barPlayIcon = document.getElementById('bar-play-icon');
-
-    let currentStationId = null;
-
-    // Initialize Station Grid
-    stations.forEach(station => {
-      const card = document.createElement('div');
-      card.className = 'glass-card rounded-2xl p-6 flex flex-col items-center justify-between text-center transition-all duration-300 hover:border-primary/40 group relative overflow-hidden';
-      card.innerHTML = `
-        <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-        <div class="relative z-10 space-y-4 w-full">
-            <div class="size-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500">
-                <span class="material-symbols-outlined text-4xl">${station.icon}</span>
-            </div>
-            <div>
-                <h3 class="text-xl font-bold">${station.name}</h3>
-                <p class="text-sm text-primary/70 font-medium" dir="rtl">${station.nameAr}</p>
-            </div>
-            <button id="btn-${station.id}" onclick="toggleRadio('${station.id}')" class="w-full bg-primary/10 hover:bg-primary text-primary hover:text-background-dark border border-primary/20 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
-                <span class="material-symbols-outlined text-lg play-icon">play_arrow</span>
-                <span>Écouter / استمع</span>
-            </button>
-        </div>
-      `;
-      grid.appendChild(card);
-    });
-
-    function toggleRadio(id) {
-      if (currentStationId === id) {
-        if (radioPlayer.paused) {
-          playStation(id);
-        } else {
-          pauseStation(id);
+<html class="dark" lang="fr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Radio Algérienne - Wi-Fi Captive Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link rel="icon" type="image/png" href="assets/logo.png">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2bee6c",
+                        "background-light": "#f8fafc",
+                        "background-dark": "#09120b",
+                        "charcoal": "#111827",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "2xl": "1.5rem", "full": "9999px" },
+                },
+            },
         }
-      } else {
-        if (currentStationId) pauseStation(currentStationId);
-        playStation(id);
-      }
-    }
+    </script>
+<style>
+        body {
+            font-family: 'Public Sans', sans-serif;
+            letter-spacing: -0.01em;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(43, 238, 108, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .heading-premium {
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+        .btn-glow {
+            box-shadow: 0 0 20px rgba(43, 238, 108, 0.3);
+            background: linear-gradient(135deg, #2bee6c 0%, #16a34a 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-primary/10 bg-background-dark/60 backdrop-blur-xl px-4 lg:px-40 py-5">
+<div class="flex items-center justify-between max-w-[1200px] mx-auto">
+<div class="flex items-center gap-3">
+<div class="size-8 text-primary">
+<img alt="Radio Algérienne Logo" class="h-full w-auto object-contain" src="assets/logo.png"/>
+</div>
+<a href="https://news.radioalgerie.dz/fr">
+<h1 class="text-lg font-black tracking-tight uppercase hidden sm:block heading-premium">Radio Algérienne</h1>
+</a>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-4 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Français</a>
+<span class="text-primary/30">|</span>
+<a class="hover:text-primary transition-colors" dir="rtl" href="#">العربية</a>
+</nav>
+<div class="flex gap-2">
+<div class="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-xs font-semibold text-primary">
+<span class="material-symbols-outlined text-sm">wifi</span>
+                        Free Wi-Fi
+                    </div>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-[1200px] mx-auto w-full px-4 py-16 space-y-24">
+<!-- Hero Section -->
+<section class="relative overflow-hidden rounded-3xl bg-charcoal dark:bg-black/40 p-12 lg:p-24 text-center border border-primary/20 shadow-2xl shadow-primary/5">
+<div class="absolute inset-0 opacity-30 pointer-events-none" style="background-image: radial-gradient(circle at 50% 50%, #2bee6c 0%, transparent 70%);">
+</div>
+<div class="absolute -top-24 -left-24 size-64 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="absolute -bottom-24 -right-24 size-64 bg-primary/10 rounded-full blur-3xl"></div>
+<div class="relative z-10 max-w-2xl mx-auto space-y-8">
+<div class="inline-flex items-center justify-center p-5 rounded-full bg-primary/10 border border-primary/20 mb-4 animate-bounce">
+<span class="material-symbols-outlined text-5xl text-primary">sensors</span>
+</div>
+<div class="space-y-4">
+    <h2 class="text-4xl lg:text-6xl font-black text-white leading-tight heading-premium tracking-tighter">
+        Radio Algérienne
+    </h2>
+    <h3 class="text-2xl lg:text-3xl font-medium text-primary/90" dir="rtl">
+        الإذاعة الجزائرية
+    </h3>
+</div>
+<p class="text-slate-400 text-lg max-w-md mx-auto leading-relaxed">
+    Connectez-vous au Wi-Fi gratuit et vivez l'information et la culture en direct.
+</p>
+<div class="pt-6">
+<button class="btn-glow text-background-dark font-black py-5 px-14 rounded-2xl transition-all transform hover:scale-105 active:scale-95 flex items-center gap-4 mx-auto text-lg">
+<span>Se Connecter / تسجيل الدخول</span>
+<span class="material-symbols-outlined">wifi_tethering</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Live Section -->
+<section class="space-y-6">
+    <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold flex items-center gap-2 heading-premium">
+            <span class="material-symbols-outlined text-red-500 animate-pulse">radio</span>
+            Radios en Direct / الإذاعات المباشرة
+        </h2>
+    </div>
+    <div id="stations-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Radio stations will be injected here by JS -->
+    </div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="mt-auto border-t border-primary/10 bg-background-dark py-20 px-4">
+<div class="max-w-[1200px] mx-auto grid md:grid-cols-3 gap-8 text-center md:text-left">
+<div class="space-y-4">
+<div class="flex items-center justify-center md:justify-start gap-2">
+<div class="size-6 text-primary">
+<img alt="Radio Algérienne Logo" class="h-full w-auto object-contain" src="assets/logo.png"/>
+</div>
+<span class="font-bold uppercase tracking-tight">Radio Algérienne</span>
+</div>
+<p class="text-sm text-slate-500 max-w-xs mx-auto md:mx-0">
+                    L'Etablissement Public de Radiodiffusion Sonore. Au service de l'information et de la culture.
+                </p>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-sm uppercase tracking-widest text-primary heading-premium">Suivez-nous</h4>
+<div class="flex justify-center md:justify-start gap-6">
+<a class="text-slate-400 hover:text-primary transition-colors" href="https://www.facebook.com/radioalgerie">
+<svg class="size-6" fill="currentColor" viewbox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path></svg>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="https://twitter.com/radioalgerie">
+<svg class="size-6" fill="currentColor" viewbox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.84 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path></svg>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="https://www.youtube.com/c/radioalgerienneAr">
+<svg class="size-6" fill="currentColor" viewbox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"></path></svg>
+</a>
+</div>
+</div>
+<div class="space-y-4">
+<h4 class="font-bold text-sm uppercase tracking-widest text-primary heading-premium">Légal</h4>
+<div class="flex flex-col gap-2 text-sm text-slate-500">
+<a class="hover:text-primary transition-colors" href="#">Conditions d'utilisation</a>
+<a class="hover:text-primary transition-colors" href="#">Politique de confidentialité</a>
+<p class="pt-2">© 2024 Radio Algérienne.</p>
+</div>
+</div>
+</div>
+</footer>
+    <!-- Persistent Player Bar -->
+    <div id="player-bar" class="fixed bottom-0 left-0 right-0 z-[60] p-4 transform translate-y-full transition-transform duration-500 ease-in-out">
+        <div class="max-w-[800px] mx-auto glass-card rounded-2xl p-4 flex items-center justify-between gap-6 border-primary/30 shadow-2xl bg-background-dark/90 text-white">
+            <div class="flex items-center gap-4 min-w-0">
+                <div id="bar-icon-container" class="size-12 rounded-xl bg-primary/20 flex items-center justify-center text-primary flex-shrink-0 animate-pulse">
+                    <span id="bar-icon" class="material-symbols-outlined text-2xl">radio</span>
+                </div>
+                <div class="min-w-0">
+                    <h4 id="bar-station-name" class="font-bold truncate text-lg">En attente...</h4>
+                    <p class="text-xs text-primary/70 uppercase tracking-widest font-bold">En Direct</p>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="toggleGlobalPlay()" class="size-14 rounded-full bg-primary text-background-dark flex items-center justify-center hover:scale-110 active:scale-90 transition-all shadow-lg shadow-primary/20">
+                    <span id="bar-play-icon" class="material-symbols-outlined text-3xl">pause</span>
+                </button>
+                <div class="hidden sm:block h-8 w-px bg-white/10 mx-2"></div>
+                <button onclick="stopRadio()" class="p-2 text-white/40 hover:text-red-500 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
-    function playStation(id) {
-      const station = stations.find(s => s.id === id);
-      const btn = document.getElementById(`btn-${id}`);
-      const icon = btn.querySelector('.play-icon');
-      const text = btn.querySelector('span:last-child');
+    <audio id="radio-player" preload="none"></audio>
+    
+    <script>
+        const stations = [
+            { id: 'chaine1', name: 'Chaîne 1', nameAr: 'القناة الأولى', url: 'https://radiochaine1.ice.infomaniak.ch/chaine1.mp3', icon: 'radio_button_checked' },
+            { id: 'chaine2', name: 'Chaîne 2', nameAr: 'القناة الثانية', url: 'https://radiochaine1.ice.infomaniak.ch/chaine2.mp3', icon: 'settings_input_antenna' },
+            { id: 'chaine3', name: 'Chaîne 3', nameAr: 'القناة الثالثة', url: 'https://radiochaine1.ice.infomaniak.ch/chaine3.mp3', icon: 'mic' },
+            { id: 'internationale', name: 'Internationale', nameAr: 'الإذاعة الدولية', url: 'https://radiointernationale.ice.infomaniak.ch/internationale.mp3', icon: 'public' },
+            { id: 'zamen', name: 'Zamen', nameAr: 'إذاعة زمان', url: 'https://radiozamen.ice.infomaniak.ch/zamen.mp3', icon: 'history' },
+            { id: 'jeunesse', name: 'Jeunesse', nameAr: 'جيل أف أم', url: 'https://radiojeunesse.ice.infomaniak.ch/jeunesse.mp3', icon: 'flash_on' },
+            { id: 'culture', name: 'Culture', nameAr: 'الثقافية', url: 'https://radioculture.ice.infomaniak.ch/culture.mp3', icon: 'menu_book' },
+            { id: 'coran', name: 'Coran', nameAr: 'إذاعة القرآن', url: 'https://radiocoran.ice.infomaniak.ch/coran.mp3', icon: 'auto_stories' }
+        ];
 
-      if (radioPlayer.src !== station.url) {
-        radioPlayer.src = station.url;
-      }
+        const grid = document.getElementById('stations-grid');
+        const radioPlayer = document.getElementById('radio-player');
+        const playerBar = document.getElementById('player-bar');
+        const barStationName = document.getElementById('bar-station-name');
+        const barIcon = document.getElementById('bar-icon');
+        const barPlayIcon = document.getElementById('bar-play-icon');
+        
+        let currentStationId = null;
 
-      radioPlayer.play().then(() => {
-        currentStationId = id;
-        // Update Card UI
-        btn.classList.remove('bg-primary/10', 'text-primary');
-        btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
-        icon.innerText = 'pause';
-        text.innerText = 'Arrêter / توقف';
+        stations.forEach(station => {
+            const card = document.createElement('div');
+            card.className = 'glass-card rounded-2xl p-6 flex flex-col items-center justify-between text-center transition-all duration-300 hover:border-primary/40 group relative overflow-hidden';
+            card.innerHTML = `
+                <div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div class="relative z-10 space-y-4 w-full">
+                    <div class="size-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center text-primary group-hover:scale-110 transition-transform duration-500">
+                        <span class="material-symbols-outlined text-4xl">${station.icon}</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold">${station.name}</h3>
+                        <p class="text-sm text-primary/70 font-medium" dir="rtl">${station.nameAr}</p>
+                    </div>
+                    <button id="btn-${station.id}" onclick="toggleRadio('${station.id}')" class="w-full bg-primary/10 hover:bg-primary text-primary hover:text-background-dark border border-primary/20 font-bold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg play-icon">play_arrow</span>
+                        <span>Écouter / استمع</span>
+                    </button>
+                </div>
+            `;
+            grid.appendChild(card);
+        });
 
-        // Update Global Player Bar
-        barStationName.innerText = station.name;
-        barIcon.innerText = station.icon;
-        barPlayIcon.innerText = 'pause';
-        playerBar.classList.remove('translate-y-full');
-      }).catch(e => {
-        console.error("Playback failed", e);
-        alert("Impossible de lire ce flux.");
-      });
-    }
+        function toggleRadio(id) {
+            if (currentStationId === id) {
+                if (radioPlayer.paused) {
+                    playStation(id);
+                } else {
+                    pauseStation(id);
+                }
+            } else {
+                if (currentStationId) pauseStation(currentStationId);
+                playStation(id);
+            }
+        }
 
-    function pauseStation(id) {
-      const btn = document.getElementById(`btn-${id}`);
-      if (btn) {
-        const icon = btn.querySelector('.play-icon');
-        const text = btn.querySelector('span:last-child');
-        btn.classList.add('bg-primary/10', 'text-primary');
-        btn.classList.remove('bg-red-500', 'text-white', 'border-red-500');
-        icon.innerText = 'play_arrow';
-        text.innerText = 'Écouter / استمع';
-      }
+        function playStation(id) {
+            const station = stations.find(s => s.id === id);
+            const btn = document.getElementById(`btn-${id}`);
+            const icon = btn.querySelector('.play-icon');
+            const text = btn.querySelector('span:last-child');
 
-      radioPlayer.pause();
-      barPlayIcon.innerText = 'play_arrow';
-    }
+            if (radioPlayer.src !== station.url) {
+                radioPlayer.src = station.url;
+            }
 
-    function toggleGlobalPlay() {
-      if (currentStationId) {
-        toggleRadio(currentStationId);
-      }
-    }
+            radioPlayer.play().then(() => {
+                currentStationId = id;
+                // Update Card
+                btn.classList.remove('bg-primary/10', 'text-primary');
+                btn.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                icon.innerText = 'pause';
+                text.innerText = 'Arrêter / توقف';
 
-    function stopRadio() {
-      if (currentStationId) {
-        pauseStation(currentStationId);
-        currentStationId = null;
-      }
-      playerBar.classList.add('translate-y-full');
-    }
-  </script>
-</body>
+                // Update Bar
+                barStationName.innerText = station.name;
+                barIcon.innerText = station.icon;
+                barPlayIcon.innerText = 'pause';
+                playerBar.classList.remove('translate-y-full');
+            }).catch(e => {
+                console.error("Playback failed", e);
+                alert("Impossible de lire ce flux.");
+            });
+        }
 
-</html>
+        function pauseStation(id) {
+            const btn = document.getElementById(`btn-${id}`);
+            if (btn) {
+                const icon = btn.querySelector('.play-icon');
+                const text = btn.querySelector('span:last-child');
+                btn.classList.add('bg-primary/10', 'text-primary');
+                btn.classList.remove('bg-red-500', 'text-white', 'border-red-500');
+                icon.innerText = 'play_arrow';
+                text.innerText = 'Écouter / استمع';
+            }
+
+            radioPlayer.pause();
+            barPlayIcon.innerText = 'play_arrow';
+        }
+
+        function toggleGlobalPlay() {
+            if (currentStationId) {
+                toggleRadio(currentStationId);
+            }
+        }
+
+        function stopRadio() {
+            if (currentStationId) {
+                pauseStation(currentStationId);
+                currentStationId = null;
+            }
+            playerBar.classList.add('translate-y-full');
+        }
+    </script>
+</body></html>
